@@ -18,56 +18,7 @@ $(function(){
 		
 		if ($this.hasClass('symbol')) {
             character = $this.attr('class').split(' ')[1];
-
-            // Add the character
-            $('#' + location).html('<img src="./symbols/' + character + '.png"/>');
-            $('#' + location).removeClass();
-            $('#' + location).addClass(character);
-
-            location++;
-
-            if(location % 17 == 0) {
-                console.log("here")
-                $('.encrypted').html($('.encrypted').html() + 
-                    '<tr align="center"><td scope="col" class="0" id="'
-                    + location +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 1) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 2) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 3) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 4) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 5) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 6) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 7) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 8) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 9) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 10) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 11) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 12) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="' 
-                    + (location + 13) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 14) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 15) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 16) +
-                    '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
-                    + (location + 17) +
-                    + '"><img src="./symbols/0.png"/></td></tr>'
-                )
-            }
+            addLetter(character);
         }
     });
     
@@ -88,12 +39,15 @@ $(function(){
                 var yValue = startingYValue;
                 for(var k = 0; k < 9; k++) {
                     var currentId = yValue * 17 + xValue;
+
+                    
+
                     var currentImg = $('#' + currentId).attr('class');
                     var currentImgVal = parseInt(currentImg);
-
                     if(currentImg != undefined && currentImgVal != 0) {
-                        message.push(currentImg);    
-                        if(message.length > location) {
+                        console.log(message.length + "coord " + xValue + " " + yValue);
+                        message.push(currentImg);
+                        if(message.length >= location) {
                             console.log("early message: " + message);
                             var result = decryptMessage(message);
                             $('#write').html(result);
@@ -102,7 +56,7 @@ $(function(){
                     } 
                     xValue+=2;
                     yValue++;
-                    if(xValue > 17) {
+                    if(xValue >= 17) {
                         xValue = 0;
                     }
                     if(yValue > currentMaxYValue) {
@@ -111,6 +65,7 @@ $(function(){
                 }
             }
             startingYValue += 9;
+            console.log(message);
         }
     });
 
@@ -139,6 +94,57 @@ $(function(){
         location = 0;
     }
 
+    function addLetter(character) {
+        // Add the character
+        $('#' + location).html('<img src="./symbols/' + character + '.png"/>');
+        $('#' + location).removeClass();
+        $('#' + location).addClass(character);
+
+        location++;
+
+        if(location % 17 == 0) {
+            $('.encrypted').html($('.encrypted').html() + 
+                '<tr align="center"><td scope="col" class="0" id="'
+                + location +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 1) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 2) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 3) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 4) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 5) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 6) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 7) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 8) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 9) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 10) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 11) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 12) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="' 
+                + (location + 13) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 14) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 15) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 16) +
+                '"><img src="./symbols/0.png"/></td><td scope="col" class="0" id="'
+                + (location + 17) +
+                + '"><img src="./symbols/0.png"/></td></tr>'
+            )
+        }
+    }
+
     document.getElementById('customFile').addEventListener('change', readFileAsString)
     function readFileAsString() {
         var files = this.files;
@@ -154,13 +160,7 @@ $(function(){
             var values = encryptedMessage.split(" ");
             reset();
             for(var i = 0; i < values.length; i++) {
-                if(values[i] != ' ') {
-                    console.log(values[i]);
-                    $('#' + i).html('<img src="./symbols/' + values[i] + '.png"/>');
-                    $('#' + location).removeClass();
-                    $('#' + i).addClass(values[i]);
-                    location++;
-                }
+                addLetter(values[i]);
             }
         };
         reader.readAsText(files[0]);
