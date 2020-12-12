@@ -95,7 +95,8 @@ $(function(){
                         message.push(currentImg);    
                         if(message.length > location) {
                             console.log("early message: " + message);
-                            decryptMessage(message);
+                            var result = decryptMessage(message);
+                            $('#write').html(result);
                             return;
                         }
                     } 
@@ -111,6 +112,14 @@ $(function(){
             }
             startingYValue += 9;
         }
+    });
+
+    $('.export-button').click(function(){
+        var message = "";
+        for(var i = 0; i <= location; i++) {
+            message = message + $('#' + i).attr('class') + " ";
+        }
+        download(message);
     });
 });
 
@@ -203,5 +212,18 @@ function decryptMessage(message) {
             messageString += message[i];
         }
     }
-    console.log(messageString);
+    return messageString;
+}
+
+function download(text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', "EncryptedMessage.txt");
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
 }
