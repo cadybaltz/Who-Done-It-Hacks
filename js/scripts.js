@@ -117,10 +117,54 @@ $(function(){
     $('.export-button').click(function(){
         var message = "";
         for(var i = 0; i <= location; i++) {
-            message = message + $('#' + i).attr('class') + " ";
+            message = message + $('#' + i).attr('class');
+            if(i!=location) {
+                message += " ";
+            }
         }
         download(message);
     });
+
+    $('.reset-button').click(function(){
+        reset();
+    });
+
+    function reset() {
+        while(location >= 0) {
+            $('#' + location).html('<img src="./symbols/0.png"/>')
+            $('#' + location).removeClass();
+            $('#' + location).addClass('0');
+            location--;
+        }
+        location = 0;
+    }
+
+    document.getElementById('customFile').addEventListener('change', readFileAsString)
+    function readFileAsString() {
+        var files = this.files;
+        if (files.length === 0) {
+            console.log('No file is selected');
+            return;
+        }
+
+        // import
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var encryptedMessage = event.target.result;
+            var values = encryptedMessage.split(" ");
+            reset();
+            for(var i = 0; i < values.length; i++) {
+                if(values[i] != ' ') {
+                    console.log(values[i]);
+                    $('#' + i).html('<img src="./symbols/' + values[i] + '.png"/>');
+                    $('#' + location).removeClass();
+                    $('#' + i).addClass(values[i]);
+                    location++;
+                }
+            }
+        };
+        reader.readAsText(files[0]);
+    }
 });
 
 function decryptMessage(message) {
@@ -174,7 +218,7 @@ function decryptMessage(message) {
         else if(message[i] == "4" || message[i] == "9" || message[i] == "38" || message[i] == "49") {
             messageString += "S";
         }
-        else if(message[i] == "2" || message[i] == "3" || message[i] == "5" || message[i] == "22" || message[i] == "23" || message[i] == "25") {
+        else if(message[i] == "2" || message[i] == "3" || message[i] == "5" || message[i] == "22" || message[i] == "23" || message[i] == "35") {
             messageString += "T";
         }
         else if(message[i] == "11" || message[i] == "28" || message[i] == "68") {
@@ -227,3 +271,4 @@ function download(text) {
   
     document.body.removeChild(element);
 }
+
