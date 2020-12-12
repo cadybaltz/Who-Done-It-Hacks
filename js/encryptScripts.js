@@ -22,7 +22,57 @@ $(function(){
         }
     });
 
-    
+    $('.encrypt-button').click(function(){
+        var message = $('#write').val();
+        var numRows = message.length / 17;
+        for(var i = 1; i <= numRows; i++) {
+            addRow(i * 17);
+        }
+        var symbols = [];
+        
+        var maxYValue = location / 17;
+        var groupsOfNine = maxYValue / 9;
+        var startingYValue = 0;
+        var index = 0;
+        while(index < message.length) {
+            var numNeededPerPass = maxYValue - startingYValue;
+            if(numNeededPerPass > 9) {
+                numNeededPerPass = 9;
+            }
+            var currentMaxYValue = startingYValue + numNeededPerPass;
+            for(var j = 0; j < 17; j++) {
+                var xValue = j;
+                var yValue = startingYValue;
+                for(var k = 0; k < 9; k++) {
+                    if(index < message.length) {
+                        if(message[index] != " ") {
+                            var symbolValue = getSymbolFromLetter(message[index]);
+                            console.log(symbolValue);
+
+                            var currentId = yValue * 17 + xValue;
+
+                            $('#' + currentId).html('<img src="./symbols/' + symbolValue + '.png"/>');
+                            $('#' + currentId).removeClass();
+                            $('#' + currentId).addClass(symbolValue);
+                            
+                            xValue+=2;
+                            yValue++;
+                            if(xValue >= 17) {
+                                xValue = 0;
+                            }
+                            if(yValue > currentMaxYValue) {
+                                yValue = startingYValue;
+                            }
+                            location++;
+                        }
+                        index++;
+                        
+                    }
+                }
+            }
+            startingYValue += 9;
+        }
+    });
     
     $('.decrypt-button').click(function(){
         var message = [];
@@ -71,10 +121,13 @@ $(function(){
     $('.export-button').click(function(){
         var message = "";
         for(var i = 0; i <= location; i++) {
-            message = message + $('#' + i).attr('class');
-            if(i!=location) {
-                message += " ";
-            }
+            var value = $('#' + i).attr('class');
+            //if(value != 0) {
+                message = message + value;
+                if(i!=location) {
+                    message += " ";
+                }
+            //} 
         }
         download(message);
     });
@@ -169,6 +222,8 @@ $(function(){
     }
 });
 
+
+
 function decryptMessage(message) {
     var messageString = "";
     for(var i = 0; i < message.length; i++) {
@@ -259,6 +314,103 @@ function decryptMessage(message) {
         }
     }
     return messageString;
+}
+
+function getSymbolFromLetter(letter) {
+    console.log("letter " + letter);
+    letter = letter.toUpperCase();
+    if(letter == "A") {
+        array = ["7", "39", "43", "66", "72"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "B") {
+        array = ["58", "63"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "C") {
+        return "67";
+    }
+    else if(letter == "D") {
+        array = ["18", "29", "47"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "E") {
+        array = ["16", "30", "42", "59", "60", "73", "62"] // 62 added
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "F") {
+        return "34";
+    }
+    else if(letter == "G") {
+        return "40";
+    }
+    else if(letter == "H") {
+        return "8";
+    }
+    else if(letter == "I") {
+        array = ["24", "36", "44", "65", "71", "37"] // 37 added
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "L") {
+        array = ["19", "61", "70"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "M") {
+        return "14";
+    }
+    else if(letter == "N") {
+        array = ["10", "21", "26", "32", "53"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "O") {
+        array = ["41", "46", "50", "57"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "P") {
+        array = ["20", "64"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "R") {
+        array = ["13", "33", "48", "52", "54", "69"] // 69 added
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "S") {
+        array = ["4", "9", "38", "49", "54"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "T") {
+        array = ["2", "3", "5", "22", "23", "35"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "U") {
+        array = ["11", "28", "68"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "V") {
+        return "17";
+    }
+    else if(letter == "W") {
+        array = ["6", "51"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "Y") {
+        array = ["15", "31"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    // Note: the following were not given in the key
+    else if(letter == "X") {
+        array = ["1", "12", "25", "27"]
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    else if(letter == "Q") {
+        return "45";
+    }
+    else if(letter == "\\") {
+        return "56";
+    }
+    else {
+        return letter;
+    }
 }
 
 function download(text) {
