@@ -21,11 +21,14 @@
   <link href="css/business-casual.min.css" rel="stylesheet">
   <link href="css/keyboard.css" rel="stylesheet">
 
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 
 <body>
   <h1 class="site-heading text-center text-white d-none d-lg-block">
-    <span class="site-heading-lower">340 Cipher</span>
+    <span class="site-heading-upper text-primary mb-3">Who Done It Hacks 2020</span>
+    <span class="site-heading-lower" style="color:black">340 Cipher</span>
   </h1>
 
   <!-- Navigation -->
@@ -63,14 +66,20 @@
       <div>
         <textarea id="write" rows="6" cols="60"></textarea>
       </div>
-      <div>
-        <button type="button" class="btn btn-dark encrypt-button">Encrypt</button>
-        <button type="button" class="btn btn-dark reset-button">Reset</button>
-        <button type="button" class="btn btn-dark export-button">Export Encrypted Message</button>
-        <div class="custom-file mb-3">
+      <div align="center" >
+        <button type="button" style="margin: 10px" class="btn btn-dark encrypt-button">Encrypt</button>
+        <button type="button" style="margin: 10px" class="btn btn-dark reset-button"> Reset </button>
+        <button type="file" style="margin: 10px" class="btn btn-dark reset-button"> Reset </button>
+
+          <div class="btn btn-primary btn-sm float-left">
+            <span>Choose file</span>
+            <input type="file">
+          </div>
+
+        <!-- <div class="custom-file mb-3">
           <input type="file" class="btn btn-dark custom-file-input" id="customFile" name="filename">
           <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -103,11 +112,14 @@
           </table>
         </div>
       </div>
-    </section>
+      <div align="center">
+        <button type="button" class="btn btn-dark export-button">Export Encrypted Message</button>
+      </div>
+      </section>
 
   <footer class="footer text-faded text-center py-5">
     <div class="container">
-      <p class="m-0 small">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 small">In memory of David Arthur Faraday, Betty Lou Jensen, Darlene Elizabeth Ferrin, Mike Renault Mageau, and Paul Lee Stine.</p>
     </div>
   </footer>
 

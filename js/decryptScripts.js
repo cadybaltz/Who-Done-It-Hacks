@@ -42,16 +42,12 @@ $(function(){
                 for(var k = 0; k < numNeededPerPass; k++) {
                     var currentId = yValue * 17 + xValue;
                     var currentImg = $('#' + currentId).attr('class');
-                    var currentImgVal = parseInt(currentImg);
-                    //if(currentImg != undefined && currentImgVal != 0) {
-                        message.push(currentImg);
-                        if(message.length >= location) {
-                            var result = decryptMessage(message);
-                            console.log("message: " + result);
-                            $('#write').val(result);
-                            return;
-                        }
-                    //} 
+                    message.push(currentImg);
+                    if(message.length >= location) {
+                        var result = decryptMessage(message);
+                        $('#write').val(result);
+                        return;
+                    }
                     xValue+=2;
                     yValue++;
                     if(xValue == 17) {
@@ -93,6 +89,7 @@ $(function(){
             location--;
         }
         location = 0;
+        $('#write').val('');
     }
 
     function addLetter(character) {

@@ -124,6 +124,7 @@ $(function(){
             location--;
         }
         location = 0;
+        $('#write').val('');
     }
 
     function addLetter(character) {
@@ -201,100 +202,6 @@ $(function(){
         reader.readAsText(files[0]);
     }
 });
-
-
-
-function decryptMessage(message) {
-    var messageString = "";
-    for(var i = 0; i < message.length; i++) {
-        if(message[i] == "7" || message[i] == "39" || message[i] == "43" || message[i] == "66" || message[i] == "72") {
-            messageString += "A";
-        }
-        else if(message[i] == "58" || message[i] == "63") {
-            messageString += "B";
-        }
-        else if(message[i] == "67") {
-            messageString += "C";
-        }
-        else if(message[i] == "18" || message[i] == "29" || message[i] == "47") {
-            messageString += "D";
-        }
-        else if(message[i] == "16" || message[i] == "30" || message[i] == "42" || message[i] == "59" || message[i] == "60" || message[i] == "73") {
-            messageString += "E";
-        }
-        else if(message[i] == "34") {
-            messageString += "F";
-        }
-        else if(message[i] == "40") {
-            messageString += "G";
-        }
-        else if(message[i] == "8") {
-            messageString += "H";
-        }
-        else if(message[i] == "24" || message[i] == "36" || message[i] == "44" || message[i] == "65" || message[i] == "71") {
-            messageString += "I";
-        }
-        else if(message[i] == "19" || message[i] == "61" || message[i] == "70") {
-            messageString += "L";
-        }
-        else if(message[i] == "14") {
-            messageString += "M";
-        }
-        else if(message[i] == "10" || message[i] == "21" || message[i] == "26" || message[i] == "32" || message[i] == "53") {
-            messageString += "N";
-        }
-        else if(message[i] == "41" || message[i] == "46" || message[i] == "50" || message[i] == "57") {
-            messageString += "O";
-        }
-        else if(message[i] == "20" || message[i] == "64") {
-            messageString += "P";
-        }
-        else if(message[i] == "13" || message[i] == "33" || message[i] == "48" || message[i] == "52"  || message[i] == "54") {
-            messageString += "R";
-        }
-        else if(message[i] == "4" || message[i] == "9" || message[i] == "38" || message[i] == "49") {
-            messageString += "S";
-        }
-        else if(message[i] == "2" || message[i] == "3" || message[i] == "5" || message[i] == "22" || message[i] == "23" || message[i] == "35") {
-            messageString += "T";
-        }
-        else if(message[i] == "11" || message[i] == "28" || message[i] == "68") {
-            messageString += "U";
-        }
-        else if(message[i] == "17") {
-            messageString += "V";
-        }
-        else if(message[i] == "6" || message[i] == "51") {
-            messageString += "W";
-        }
-        else if(message[i] == "15" || message[i] == "31") {
-            messageString += "Y";
-        }
-        // Note: the following were not given in the key
-        else if(message[i] == "1" || message[i] == "12" || message[i] == "25" || message[i] == "27") {
-            messageString += "X";
-        }
-        else if(message[i] == "37") {
-            messageString += "I";
-        }
-        else if(message[i] == "45") {
-            messageString += "Q";
-        }
-        else if(message[i] == "56") {
-            messageString += "\\";
-        }
-        else if(message[i] == "62") {
-            messageString += "E";
-        }
-        else if(message[i] == "69") {
-            messageString += "R";
-        }
-        else {
-            messageString += message[i];
-        }
-    }
-    return messageString;
-}
 
 function getSymbolFromLetter(letter) {
     letter = letter.toUpperCase();

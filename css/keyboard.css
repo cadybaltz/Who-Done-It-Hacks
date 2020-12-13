@@ -76,9 +76,3 @@ left: 1px;
 border-color: #e5e5e5;
 cursor: pointer;
 }
-
-.image-1 {
-    filter: invert(100%);
-    -webkit-filter: invert(100%);
-    background-color: red;
-  }
