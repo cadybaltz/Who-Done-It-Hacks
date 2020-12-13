@@ -85,6 +85,9 @@
           </tbody>
         </table>
       </div>
+      <div align="center">
+        <button type="button" class="btn btn-primary export-button">Export Encrypted Message</button>
+      </div>
     </div>
   </section>
 
@@ -168,21 +171,25 @@
           <li class="delete lastitem">delete</li>
       </ul>
       </div>
+      <div class="custom-file mb-3">
+        <input type="file" class="btn btn-dark custom-file-input" id="customFile" name="filename">
+        <label class="custom-file-label" for="customFile">OR, import encrypted file</label>
+      </div>
+      <div align="center">
+        <button type="button" style="margin-right: 10px; margin-top: 10px" class="btn btn-primary decrypt-button">Decrypt</button>
+        <button type="button" style="margin-left: 10px; margin-top: 10px" class="btn btn-primary reset-button">Reset</button>
+      </div>
+      <br/>
+      <br/>
+      <br/>
       <br/>
       <div>
-        <button type="button" class="btn btn-dark decrypt-button">Decrypt</button>
-        <button type="button" class="btn btn-dark reset-button">Reset</button>
-        <button type="button" class="btn btn-dark export-button">Export Encrypted Message</button>
-        <div class="custom-file mb-3">
-          <input type="file" class="btn btn-dark custom-file-input" id="customFile" name="filename">
-          <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
+        <textarea id="write" rows="6" cols="60" ></textarea>
       </div>
-      <div>
-        <textarea id="write" rows="6" cols="60"></textarea>
+      <div align="center">
+        <button type="button" style="margin-top: 10px" class="btn btn-primary export-text-button">Export Decrypted Message</button>
       </div>
-    </div>
-  </section>
+    </section>
 
   <footer class="footer text-faded text-center py-5">
     <div class="container">

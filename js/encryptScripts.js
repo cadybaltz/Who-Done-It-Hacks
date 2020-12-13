@@ -125,6 +125,7 @@ $(function(){
         }
         location = 0;
         $('#write').val('');
+        $('.encrypted').html('<tr align="center"><td scope="col" id="0" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="1" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="2" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="3" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="4" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="5" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="6" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="7" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="8" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="9" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="10" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="11" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="12" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="13" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="14" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="15" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="16" class="0"><img src="./symbols/0.png"/></td></tr>');
     }
 
     function addLetter(character) {
@@ -179,27 +180,6 @@ $(function(){
             + (location + 17) +
             + '"><img src="./symbols/0.png"/></td></tr>'
         )
-    }
-
-    document.getElementById('customFile').addEventListener('change', readFileAsString)
-    function readFileAsString() {
-        var files = this.files;
-        if (files.length === 0) {
-            console.log('No file is selected');
-            return;
-        }
-
-        // import
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            var encryptedMessage = event.target.result;
-            var values = encryptedMessage.split(" ");
-            reset();
-            for(var i = 0; i < values.length; i++) {
-                addLetter(values[i]);
-            }
-        };
-        reader.readAsText(files[0]);
     }
 });
 

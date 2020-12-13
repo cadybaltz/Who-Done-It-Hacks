@@ -74,7 +74,12 @@ $(function(){
                 message += " ";
             }
         }
-        download(message);
+        download("EncryptedMessage.txt", message);
+    });
+
+    $('.export-text-button').click(function(){
+        var message = $('#write').val();
+        download("DecryptedMessage.txt", message);
     });
 
     $('.reset-button').click(function(){
@@ -90,6 +95,7 @@ $(function(){
         }
         location = 0;
         $('#write').val('');
+        $('.encrypted').html('<tr align="center"><td scope="col" id="0" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="1" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="2" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="3" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="4" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="5" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="6" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="7" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="8" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="9" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="10" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="11" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="12" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="13" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="14" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="15" class="0"><img src="./symbols/0.png"/></td><td scope="col" id="16" class="0"><img src="./symbols/0.png"/></td></tr>');
     }
 
     function addLetter(character) {
@@ -270,10 +276,10 @@ function decryptMessage(message) {
     return messageString;
 }
 
-function download(text) {
+function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', "EncryptedMessage.txt");
+    element.setAttribute('download', filename);
   
     element.style.display = 'none';
     document.body.appendChild(element);

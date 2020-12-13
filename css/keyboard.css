@@ -76,3 +76,16 @@ left: 1px;
 border-color: #e5e5e5;
 cursor: pointer;
 }
+.btn-primary, .btn-primary:visited {
+    background-color: #6EDE75;
+    color: #000;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: rgba(110, 222, 117, .75);
+    color: #000;
+}
+
+.btn, .btn:hover, .btn:active, .btn:visited {
+    border-color: transparent;
+}
