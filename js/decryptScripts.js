@@ -48,6 +48,8 @@ $(function(){
                         $('#write').val(result);
                         return;
                     }
+                    console.log("x val");
+                    console.log("y val");
                     xValue+=2;
                     yValue++;
                     if(xValue == 17) {

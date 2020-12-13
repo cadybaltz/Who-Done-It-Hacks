@@ -33,10 +33,10 @@ $(function(){
         }
 
         var groupsOfNine = message.length / (17 * 9);
+        var listIndex = 0;
 
         console.log("go9: " + groupsOfNine);
         var startingYValue = 0;
-        var valuesAdded = 0;
         for(var i = 0; i < groupsOfNine; i++) {
             // Each group of nine lines
             var numNeededPerPass = numRows - startingYValue;
@@ -53,41 +53,42 @@ $(function(){
                 console.log("starting y: " + yValue);
                 for(var k = 0; k < numNeededPerPass; k++) {
                     // for each value in the diagonal
-                    if(valuesAdded < message.length) {
+                    if(listIndex < message.length) {
                         // Getting next letter
-                        var symbolValue = getSymbolFromLetter(message[location]);
-
-                        var imageValue;
-                        if(symbolValue == message[location].toUpperCase()) {
-                            imageValue = 0;
-                        }
-                        else {
-                            imageValue = symbolValue;
-                        }
-
-                        var currentId = yValue * 17 + xValue;
-
-                        $('#' + currentId).html('<img src="./symbols/' + imageValue + '.png"/>');
-                        $('#' + currentId).removeClass();
-                        $('#' + currentId).addClass(symbolValue);
                         
-                        xValue+=2;
-                        yValue++;
-                        if(xValue == 17) {
-                            xValue = 0;
-                        }
-                        else if(xValue == 18) {
-                            xValue = 1;
-                        }
-                        if(yValue > currentMaxYValue) {
-                            yValue--;
-                            xValue = 0;
-                        }
-                        valuesAdded++;
-                        if(currentId > location) {
-                            location = currentId;
-                        }
-                        
+                        //if(message[listIndex] != undefined) {
+                            var symbolValue = getSymbolFromLetter(message[listIndex]);
+                            var imageValue;
+                            if(symbolValue == message[listIndex].toUpperCase()) {
+                                imageValue = 0;
+                            }
+                            else {
+                                imageValue = symbolValue;
+                            }
+
+                            var currentId = yValue * 17 + xValue;
+
+                            $('#' + currentId).html('<img src="./symbols/' + imageValue + '.png"/>');
+                            $('#' + currentId).removeClass();
+                            $('#' + currentId).addClass(symbolValue);
+                            
+                            xValue+=2;
+                            yValue++;
+                            if(xValue == 17) {
+                                xValue = 0;
+                            }
+                            else if(xValue == 18) {
+                                xValue = 1;
+                            }
+                            if(yValue > currentMaxYValue) {
+                                yValue--;
+                                xValue = 0;
+                            }
+                            if(currentId > location) {
+                                location = currentId;
+                            }
+                        //}
+                        listIndex++;
                     }
                     else {
                         return;
@@ -104,12 +105,12 @@ $(function(){
         var message = "";
         for(var i = 0; i <= location; i++) {
             var value = $('#' + i).attr('class');
-            if(value != "0") {
+            //if(value != "0") {
                 message = message + value;
                 if(i!=location) {
                     message += " ";
                 }
-            } 
+            //} 
         }
         download(message);
     });
@@ -186,6 +187,8 @@ $(function(){
 });
 
 function getSymbolFromLetter(letter) {
+    if(letter == undefined)
+        return undefined
     letter = letter.toUpperCase();
     if(letter == "A") {
         array = ["7", "39", "43", "66", "72"]
