@@ -267,7 +267,6 @@ function decryptMessage(message) {
             messageString += "R";
         }
         else if(message[i] == "0") {
-            messageString += " ";
         }
         else {
             messageString += message[i];

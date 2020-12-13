@@ -36,6 +36,7 @@ $(function(){
 
         console.log("go9: " + groupsOfNine);
         var startingYValue = 0;
+        var valuesAdded = 0;
         for(var i = 0; i < groupsOfNine; i++) {
             // Each group of nine lines
             var numNeededPerPass = numRows - startingYValue;
@@ -52,7 +53,7 @@ $(function(){
                 console.log("starting y: " + yValue);
                 for(var k = 0; k < numNeededPerPass; k++) {
                     // for each value in the diagonal
-                    if(location < message.length) {
+                    if(valuesAdded < message.length) {
                         // Getting next letter
                         var symbolValue = getSymbolFromLetter(message[location]);
 
@@ -82,8 +83,10 @@ $(function(){
                             yValue--;
                             xValue = 0;
                         }
-
-                        location++;
+                        valuesAdded++;
+                        if(currentId > location) {
+                            location = currentId;
+                        }
                         
                     }
                     else {
@@ -99,10 +102,9 @@ $(function(){
 
     $('.export-button').click(function(){
         var message = "";
-        console.log("location: " + location);
         for(var i = 0; i <= location; i++) {
             var value = $('#' + i).attr('class');
-            if(value != undefined) {
+            if(value != "0") {
                 message = message + value;
                 if(i!=location) {
                     message += " ";
