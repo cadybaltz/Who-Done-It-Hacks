@@ -59,7 +59,12 @@ $(function(){
                         //if(message[listIndex] != undefined) {
                             var symbolValue = getSymbolFromLetter(message[listIndex]);
                             var imageValue;
-                            if(symbolValue == message[listIndex].toUpperCase()) {
+                            if(symbolValue == " ") {
+                                console.log("herehehe");
+                                imageValue = 0;
+                                symbolValue = "75";
+                            }
+                            else if(symbolValue == message[listIndex].toUpperCase()) {
                                 imageValue = 0;
                             }
                             else {

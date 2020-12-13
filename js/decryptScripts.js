@@ -270,6 +270,10 @@ function decryptMessage(message) {
         }
         else if(message[i] == "0") {
         }
+        else if(message[i] == "75") {
+            console.log("75 detected");
+            messageString+=" ";
+        }
         else {
             messageString += message[i];
         }
