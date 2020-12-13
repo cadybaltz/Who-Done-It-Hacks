@@ -24,49 +24,70 @@ $(function(){
 
     $('.encrypt-button').click(function(){
         var message = $('#write').val();
+
         var numRows = message.length / 17;
-        for(var i = 1; i <= numRows; i++) {
+        console.log("num rows: " + numRows);
+        for(var i = 1; i < numRows; i++) {
+            console.log("adding row with " + (i * 17));
             addRow(i * 17);
         }
-        var symbols = [];
-        
-        var maxYValue = location / 17;
-        var groupsOfNine = maxYValue / 9;
+
+        var groupsOfNine = message.length / (17 * 9);
+
+        console.log("go9: " + groupsOfNine);
         var startingYValue = 0;
-        var index = 0;
-        while(index < message.length) {
-            var numNeededPerPass = maxYValue - startingYValue;
+        for(var i = 0; i < groupsOfNine; i++) {
+            // Each group of nine lines
+            var numNeededPerPass = numRows - startingYValue;
             if(numNeededPerPass > 9) {
                 numNeededPerPass = 9;
             }
+            console.log("num needed per pass: " + numNeededPerPass);
             var currentMaxYValue = startingYValue + numNeededPerPass;
             for(var j = 0; j < 17; j++) {
+                // For each value along the top row of the group of nine
                 var xValue = j;
                 var yValue = startingYValue;
-                for(var k = 0; k < 9; k++) {
-                    if(index < message.length) {
-                        if(message[index] != " ") {
-                            var symbolValue = getSymbolFromLetter(message[index]);
-                            console.log(symbolValue);
+                console.log("starting x: " + xValue);
+                console.log("starting y: " + yValue);
+                for(var k = 0; k < numNeededPerPass; k++) {
+                    // for each value in the diagonal
+                    if(location < message.length) {
+                        // Getting next letter
+                        var symbolValue = getSymbolFromLetter(message[location]);
 
-                            var currentId = yValue * 17 + xValue;
-
-                            $('#' + currentId).html('<img src="./symbols/' + symbolValue + '.png"/>');
-                            $('#' + currentId).removeClass();
-                            $('#' + currentId).addClass(symbolValue);
-                            
-                            xValue+=2;
-                            yValue++;
-                            if(xValue >= 17) {
-                                xValue = 0;
-                            }
-                            if(yValue > currentMaxYValue) {
-                                yValue = startingYValue;
-                            }
-                            location++;
+                        var imageValue;
+                        if(symbolValue == message[location].toUpperCase()) {
+                            imageValue = 0;
                         }
-                        index++;
+                        else {
+                            imageValue = symbolValue;
+                        }
+
+                        var currentId = yValue * 17 + xValue;
+
+                        $('#' + currentId).html('<img src="./symbols/' + imageValue + '.png"/>');
+                        $('#' + currentId).removeClass();
+                        $('#' + currentId).addClass(symbolValue);
                         
+                        xValue+=2;
+                        yValue++;
+                        if(xValue == 17) {
+                            xValue = 0;
+                        }
+                        else if(xValue == 18) {
+                            xValue = 1;
+                        }
+                        if(yValue > currentMaxYValue) {
+                            yValue--;
+                            xValue = 0;
+                        }
+
+                        location++;
+                        
+                    }
+                    else {
+                        return;
                     }
                 }
             }
@@ -74,60 +95,19 @@ $(function(){
         }
     });
     
-    $('.decrypt-button').click(function(){
-        var message = [];
-
-        var maxYValue = location / 17;
-        var groupsOfNine = maxYValue / 9;
-        var startingYValue = 0;
-        for(var i = 0; i < groupsOfNine; i++) {
-            var numNeededPerPass = maxYValue - startingYValue;
-            if(numNeededPerPass > 9) {
-                numNeededPerPass = 9;
-            }
-            var currentMaxYValue = startingYValue + numNeededPerPass;
-            for(var j = 0; j < 17; j++) {
-                var xValue = j;
-                var yValue = startingYValue;
-                for(var k = 0; k < 9; k++) {
-                    var currentId = yValue * 17 + xValue;
-
-                    
-
-                    var currentImg = $('#' + currentId).attr('class');
-                    var currentImgVal = parseInt(currentImg);
-                    if(currentImg != undefined && currentImgVal != 0) {
-                        message.push(currentImg);
-                        if(message.length >= location) {
-                            var result = decryptMessage(message);
-                            $('#write').html(result);
-                            return;
-                        }
-                    } 
-                    xValue+=2;
-                    yValue++;
-                    if(xValue >= 17) {
-                        xValue = 0;
-                    }
-                    if(yValue > currentMaxYValue) {
-                        yValue = startingYValue;
-                    }
-                }
-            }
-            startingYValue += 9;
-        }
-    });
+ 
 
     $('.export-button').click(function(){
         var message = "";
+        console.log("location: " + location);
         for(var i = 0; i <= location; i++) {
             var value = $('#' + i).attr('class');
-            //if(value != 0) {
+            if(value != undefined) {
                 message = message + value;
                 if(i!=location) {
                     message += " ";
                 }
-            //} 
+            } 
         }
         download(message);
     });
@@ -317,7 +297,6 @@ function decryptMessage(message) {
 }
 
 function getSymbolFromLetter(letter) {
-    console.log("letter " + letter);
     letter = letter.toUpperCase();
     if(letter == "A") {
         array = ["7", "39", "43", "66", "72"]

@@ -27,11 +27,11 @@ $(function(){
     $('.decrypt-button').click(function(){
         var message = [];
 
-        var maxYValue = location / 17;
-        var groupsOfNine = maxYValue / 9;
+        var numRows = location / 17;
+        var groupsOfNine = location / (17 * 9);
         var startingYValue = 0;
         for(var i = 0; i < groupsOfNine; i++) {
-            var numNeededPerPass = maxYValue - startingYValue;
+            var numNeededPerPass = numRows - startingYValue;
             if(numNeededPerPass > 9) {
                 numNeededPerPass = 9;
             }
@@ -39,28 +39,30 @@ $(function(){
             for(var j = 0; j < 17; j++) {
                 var xValue = j;
                 var yValue = startingYValue;
-                for(var k = 0; k < 9; k++) {
+                for(var k = 0; k < numNeededPerPass; k++) {
                     var currentId = yValue * 17 + xValue;
-
-                    
-
                     var currentImg = $('#' + currentId).attr('class');
                     var currentImgVal = parseInt(currentImg);
-                    if(currentImg != undefined && currentImgVal != 0) {
+                    //if(currentImg != undefined && currentImgVal != 0) {
                         message.push(currentImg);
                         if(message.length >= location) {
                             var result = decryptMessage(message);
-                            $('#write').html(result);
+                            console.log("message: " + result);
+                            $('#write').val(result);
                             return;
                         }
-                    } 
+                    //} 
                     xValue+=2;
                     yValue++;
-                    if(xValue >= 17) {
+                    if(xValue == 17) {
                         xValue = 0;
                     }
+                    else if(xValue == 18) {
+                        xValue = 1;
+                    }
                     if(yValue > currentMaxYValue) {
-                        yValue = startingYValue;
+                        yValue--;
+                        xValue = 0;
                     }
                 }
             }
@@ -94,7 +96,12 @@ $(function(){
     }
 
     function addLetter(character) {
-        $('#' + location).html('<img src="./symbols/' + character + '.png"/>');
+        if(!isNaN(character) && parseInt(character) <= 73) {
+            $('#' + location).html('<img src="./symbols/' + character + '.png"/>');
+        }
+        else {
+            $('#' + location).html('<img src="./symbols/0.png"/>');
+        }
         $('#' + location).removeClass();
         $('#' + location).addClass(character);
 
@@ -104,6 +111,8 @@ $(function(){
             addRow(location);
         }
     }
+
+    
 
     function addRow(location) {
         $('.encrypted').html($('.encrypted').html() + 
@@ -253,6 +262,9 @@ function decryptMessage(message) {
         }
         else if(message[i] == "69") {
             messageString += "R";
+        }
+        else if(message[i] == "0") {
+            messageString += " ";
         }
         else {
             messageString += message[i];
