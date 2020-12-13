@@ -251,7 +251,7 @@ function getSymbolFromLetter(letter) {
         return array[Math.floor(Math.random() * array.length)];
     }
     else if(letter == "S") {
-        array = ["4", "9", "38", "49", "54"]
+        array = ["4", "9", "38", "49"]
         return array[Math.floor(Math.random() * array.length)];
     }
     else if(letter == "T") {
