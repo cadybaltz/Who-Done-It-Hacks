@@ -6,6 +6,7 @@ body {
 font: 71%/1.5 Verdana, Sans-Serif;
 background: #eee;
 }
+
 #container {
 margin: 100px auto;
 width: 688px;
@@ -77,12 +78,12 @@ border-color: #e5e5e5;
 cursor: pointer;
 }
 .btn-primary, .btn-primary:visited {
-    background-color: #6EDE75;
+    background-color: #f7ba24;
     color: #000;
 }
 
 .btn-primary:hover, .btn-primary:active {
-    background-color: rgba(110, 222, 117, .75);
+    background-color: rgba(247, 286, 36, .75);
     color: #000;
 }
 

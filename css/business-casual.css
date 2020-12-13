@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Lora';
-  background-image: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65));
+  background-image: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)) url("./img/bg.png");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -80,12 +80,12 @@ p {
 }
 
 #mainNav {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(6, 42, 75, 0.9);
   font-family: 'Raleway';
 }
 
 #mainNav .navbar-brand {
-  color: #6EDE75;
+  color: #f7ba24;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
@@ -94,7 +94,7 @@ p {
 }
 
 #mainNav .navbar-nav .nav-item.active .nav-link {
-  color: #6EDE75;
+  color: #f7ba24;
 }
 
 @media (min-width: 992px) {
@@ -105,7 +105,7 @@ p {
     color: rgba(255, 255, 255, 0.4);
   }
   #mainNav .navbar-nav .nav-item.active .nav-link:hover {
-    color: #6EDE75;
+    color: #f7ba24;
   }
 }
 
@@ -150,7 +150,7 @@ p {
 .cta {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: rgba(110, 222, 117, 0.9);
+  background-color: rgba(247, 186, 36, 0.9);
 }
 
 .cta .cta-inner {
@@ -208,7 +208,7 @@ p {
 }
 
 .list-hours .list-hours-item {
-  border-bottom: 1px solid rgba(110, 222, 117, 0.5);
+  border-bottom: 1px solid rgba(247, 186, 36, 0.5);
   padding-bottom: .25rem;
   margin-bottom: 1rem;
   font-style: italic;
@@ -216,7 +216,7 @@ p {
 
 .list-hours .list-hours-item.today {
   font-weight: bold;
-  color: #6EDE75;
+  color: #f7ba24;
 }
 
 @media (min-width: 992px) {
@@ -231,15 +231,15 @@ p {
 }
 
 .footer {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(6, 42, 75, 0.9);
 }
 
 .text-primary {
-  color: #6EDE75 !important;
+  color: #f7ba24 !important;
 }
 
 .bg-primary {
-  background-color: #6EDE75 !important;
+  background-color: #f7ba24 !important;
 }
 
 .btn {
@@ -247,13 +247,13 @@ p {
 }
 
 .btn-primary {
-  background-color: #6EDE75;
-  border-color: #6EDE75;
+  background-color: #f7ba24;
+  border-color: #f7ba24;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #44d54d;
-  border-color: #44d54d;
+  background-color: #e0a108;
+  border-color: #e0a108;
 }
 
 .font-weight-light {
